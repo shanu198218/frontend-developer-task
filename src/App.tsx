@@ -1,24 +1,21 @@
-import './App.css';
+import Header from './components/common/header';
+import { ThemeProvider } from './components/common/theme/theme-provider';
+import Dashboard from './pages/dashboard';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="text-primary text-bold">test code</h1>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <div className="min-h-screen bg-white text-black dark:bg-[#0a0f16] dark:text-white transition-colors">
+        <Header
+          appName="DemoApp"
+          sectionLabel="Loan Management"
+          unreadCount={3}
+          onSearch={v => console.log('Search:', v)}
+        />
+        <main className="p-4">
+          <Dashboard />
+        </main>
+      </div>
+    </ThemeProvider>
   );
 }
-
-export default App;
