@@ -1,13 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+// src/main.tsx (or src/index.tsx)
+import React from "react";
+import ReactDOM from "react-dom/client";
 import './index.css';
-import App from './App';
+import App from "./App";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+async function prepare() {
+  if (process.env.NODE_ENV === "development") {
+    const { worker } = await import("./mocks/browser");
+    await worker.start();
+  }
+}
+
+prepare().then(() => {
+  ReactDOM.createRoot(document.getElementById("root")!).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+});

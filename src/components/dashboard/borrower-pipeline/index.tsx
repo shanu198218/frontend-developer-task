@@ -1,43 +1,40 @@
+import { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 import { Badge } from '../../ui/badge';
-import BorrowerItem, { Borrower } from './borrower-item';
-
-const borrowers: Borrower[] = [
-  {
-    id: '1',
-    name: 'Ava Patel',
-    status: 'New',
-    product: 'Home Loan',
-    variant: 'Fixed',
-    amount: '$520,000',
-  },
-  {
-    id: '2',
-    name: 'Liam Chen',
-    status: 'In Review',
-    product: 'Refinance',
-    variant: 'Variable',
-    amount: '$310,000',
-  },
-  {
-    id: '3',
-    name: 'Sophia Nguyen',
-    status: 'Approved',
-    product: 'Investment',
-    variant: 'Fixed',
-    amount: '$780,000',
-  },
-  {
-    id: '4',
-    name: 'Ethan Brooks',
-    status: 'Renew',
-    product: 'Renewal',
-    variant: 'Variable',
-    amount: '$220,000',
-  },
-];
+import { PipelineResponse } from '../../../types/borrower.pipeline.type';
+import { transformBorrower } from '../../../lib/helper.utils';
+import { Borrower } from '../../../types/borrower.type';
+import BorrowerItem from './borrower-item';
+import BorrowerPipelineSkeleton from '../../../components/common/skeltons/borrow-pipline-skeltons';
 
 export default function BorrowerPipeline() {
+  const [borrowers, setBorrowers] = useState<Borrower[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch('/api/borrowers/pipeline');
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      const data: PipelineResponse = await res.json();
+      setBorrowers([
+        ...data.new.map(transformBorrower),
+        ...data.in_review.map(transformBorrower),
+        ...data.approved.map(transformBorrower),
+      ]);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { fetchData(); }, [fetchData]);
+
+  const isEmpty = !borrowers.length;
+
   return (
     <Card className="rounded-3xl bg-background/40 border-white/10">
       <CardHeader>
@@ -51,20 +48,22 @@ export default function BorrowerPipeline() {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
-        {borrowers.map(b => (
-          <BorrowerItem key={b.id} borrower={b} />
-        ))}
-
+        {loading || error ? (
+          <BorrowerPipelineSkeleton count={3} />
+        ) : isEmpty ? (
+          <div className="text-center py-8 text-foreground/60">
+            No borrowers in pipeline
+          </div>
+        ) : (
+          borrowers.map(b => <BorrowerItem key={b.id} borrower={b} />)
+        )}
         <div className="pt-4">
           <div className="text-xs uppercase text-foreground/60 mb-2">
             F-SANITISED ACTIVE
           </div>
           <div className="flex items-center gap-2">
             <Badge className="bg-cyan-700">Enabled</Badge>
-            <Badge
-              variant="outline"
-              className="border-white/20 text-foreground/70"
-            >
+            <Badge variant="outline" className="border-white/20 text-foreground/70">
               Disabled
             </Badge>
           </div>
