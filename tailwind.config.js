@@ -18,6 +18,11 @@ module.exports = {
     },
     extend: {
       colors: {
+      blue:{
+        base :"#60a5fa",
+        dark : "#0f1724"
+
+      },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -48,7 +53,7 @@ module.exports = {
           foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
+          DEFAULT: "#0f1724",
           foreground: "hsl(var(--card-foreground))",
         },
       },

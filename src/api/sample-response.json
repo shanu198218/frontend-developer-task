@@ -98,6 +98,7 @@
       "url": "/api/broker/{id}",
       "response": {
         "name": "Robert Turner",
+        "employment": "At Tech Company",
         "deals": 16,
         "approval_rate": "75%",
         "pending": 7660

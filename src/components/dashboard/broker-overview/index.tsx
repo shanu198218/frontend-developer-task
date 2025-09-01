@@ -4,19 +4,30 @@ import { Button } from '../../ui/button';
 import { Separator } from '../../ui/separator';
 import { Switch } from '../../ui/switch';
 import OnboardingWorkflow from './on-boarding-work-flow';
+import { useOverviewStore } from '../../../store/borrower-overview-store';
+import { useEffect } from 'react';
+import { OverviewPercentage } from './overview-percentage';
 
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-2xl bg-white/5 px-4 py-3 text-center">
-      <div className="text-sm text-foreground/60">{label}</div>
-      <div className="mt-1 text-xl font-semibold">{value}</div>
-    </div>
-  );
-}
+
+
 
 export default function BrokerOverview() {
+  const {
+  
+    broker,
+    workflow,
+  
+    fetchBroker,
+    fetchWorkflow,
+  } = useOverviewStore();
+
+  useEffect(() => {
+
+    fetchBroker('1');
+    fetchWorkflow();
+  }, [ fetchBroker, fetchWorkflow]);
   return (
-    <Card className="rounded-3xl bg-background/40 border-white/10">
+    <Card className="rounded-3xl dark:bg-card bg-background/40 border-white/10">
       <CardHeader>
         <CardTitle>Broker Overview</CardTitle>
       </CardHeader>
@@ -28,20 +39,20 @@ export default function BrokerOverview() {
             <AvatarFallback>RT</AvatarFallback>
           </Avatar>
           <div>
-            <div className="font-semibold leading-tight">Robert Turner</div>
+            <div className="font-semibold leading-tight">{broker?.name}</div>
             <div className="text-sm text-foreground/70">
-              Senior Broker • West Coast
+              {broker?.employment || 'At Tech Company'} • West Coast
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-3">
-          <Stat label="Deals" value="16" />
-          <Stat label="Approval Rate" value="75%" />
-          <Stat label="Pending" value="$7,660" />
+        <div className="grid grid-cols-3 gap-2">
+          <OverviewPercentage label="Deals" value={broker?.deals?.toString() ?? null} />
+          <OverviewPercentage label="Approval Rate" value={broker?.approval_rate ?? null} />
+          <OverviewPercentage label="Pending" value={broker?.pending.toString() ?? null} />
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center gap-4">
           <Button variant="secondary">Call</Button>
           <Button variant="secondary">Email</Button>
           <Button variant="secondary">Chat</Button>
@@ -49,7 +60,12 @@ export default function BrokerOverview() {
 
         <Separator className="opacity-10" />
 
-        <OnboardingWorkflow />
+        <OnboardingWorkflow
+          steps={(workflow?.steps ?? []).map((label, i) => ({
+            label,
+            done: false,
+          }))}
+        />
 
         <div className="pt-1">
           <div className="mb-2 font-semibold">AI Assistant</div>

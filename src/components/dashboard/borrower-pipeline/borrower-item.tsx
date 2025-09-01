@@ -10,14 +10,14 @@ export default function BorrowerItem({ borrower }: { borrower: Borrower }) {
         flex items-between justify-between
         rounded-2xl border border-white/10
         bg-slate-900/70 px-4 py-3
-        hover:bg-slate-900 transition
+        hover:bg-card/20 transition
       "
     >
       <div className="flex">
         <div className="w-64 flex-initial">
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <div className="truncate font-semibold text-white max-w-[60%]">
+              <div className="truncate md:text-base text-sm font-semibold text-white max-w-[60%]">
                 {borrower.name}
               </div>
 
@@ -25,7 +25,7 @@ export default function BorrowerItem({ borrower }: { borrower: Borrower }) {
                 className={`
               ${statusColor[borrower.status]}
               text-black font-medium
-              rounded-full px-2.5 py-0.5 text-xs
+              rounded-full px-2 py-1 md:text-sm text-xs
             `}
               >
                 {borrower.status}
@@ -35,10 +35,14 @@ export default function BorrowerItem({ borrower }: { borrower: Borrower }) {
             <div className="text-sm my-2 text-white/60 truncate">
               {borrower.product} • {borrower.variant}
             </div>
+             <div className="font-semibold text-white whitespace-nowrap md:hidden">
+            {borrower.amount}
+          </div>
           </div>
         </div>
-        <div className="w-32 flex-initial">
+        <div className="w-32 flex-initial hidden md:block">
           {' '}
+          
           <div className="text-right font-semibold text-white whitespace-nowrap">
             {borrower.amount}
           </div>
