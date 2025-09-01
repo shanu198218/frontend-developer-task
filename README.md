@@ -19,7 +19,4 @@ cd frontend-developer-task
 npm install
 npm run dev
 
-## 🧩 UI Overview
-<img width="1920" height="1052" alt="image" src="https://github.com/user-attachments/assets/c83aeb84-8ae1-40d4-b74f-3e8e67a082ae" />
-<img width="628" height="2943" alt="screencapture-localhost-3000-2025-09-01-23_00_20" src="https://github.com/user-attachments/assets/ee8920e0-16ff-43ec-a3f9-22ce4f7af7d2" />
 
