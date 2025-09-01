@@ -23,7 +23,7 @@ A **React dashboard** for managing borrowers, loans, and broker info. Built with
 git clone <repo-url>
 cd frontend-developer-task
 npm install
-npm run dev
+npm run start
 
 
 
