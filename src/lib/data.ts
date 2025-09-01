@@ -3,3 +3,5 @@ export const filters = [
   { label: 'In Review', className: 'bg-amber-500 hover:bg-amber-600' },
   { label: 'Approved', className: 'bg-emerald-500 hover:bg-emerald-600' },
 ];
+
+export const tabs = ['New', 'In Review', 'Approved'];

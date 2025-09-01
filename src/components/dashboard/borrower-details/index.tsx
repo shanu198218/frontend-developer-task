@@ -9,6 +9,7 @@ import InfoGrid from './info-grid';
 import { useEffect, useState } from 'react';
 import { useBorrowerStore } from '../../../store/borrower-store';
 import BorrowerDetailSkeleton from '../../../components/common/skeltons/borrow-details-skeltons';
+import { OctagonX } from 'lucide-react';
 
 export default function BorrowerDetail({ borrowerId }: { borrowerId: string }) {
   const [actionLoading] = useState<string | null>(null);
@@ -17,7 +18,7 @@ export default function BorrowerDetail({ borrowerId }: { borrowerId: string }) {
     useBorrowerStore();
 
   useEffect(() => {
-    fetchBorrower(borrowerId);
+    if (borrowerId) fetchBorrower(borrowerId);
   }, [borrowerId, fetchBorrower]);
 
   if (loading)
@@ -83,15 +84,27 @@ export default function BorrowerDetail({ borrowerId }: { borrowerId: string }) {
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <LoanSummaryCard title="AI Explainability" />
+        <LoanSummaryCard
+          title="AI Expandability"
+          content={
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Income verified</li>
+              <li>Debt ratio checked</li>
+              <li>Credit score analysis</li>
+            </ul>
+          }
+        />
+
         <AlertList items={borrowerDetails.ai_flags || []} />
 
         <InfoGrid />
         {borrowerDetails.risk_signal && (
           <Card className="rounded-2xl bg-amber-500/90 px-4 py-3 border-0">
-            <div className="flex items-start gap-3">
-              <span className="mt-0.5">⚠️</span>
-              <p className="text-sm font-medium">
+            <div className="flex items-center justify-center gap-3">
+              <span className="mt-0.5">
+                <OctagonX color="black" size={24} />
+              </span>
+              <p className="text-sm  text-center dark:text-black font-medium">
                 {borrowerDetails.risk_signal}
               </p>
             </div>
