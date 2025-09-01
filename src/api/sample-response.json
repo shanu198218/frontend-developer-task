@@ -49,6 +49,7 @@
         "existing_loan": 240000,
         "credit_score": 720,
         "source_of_funds": "Declared",
+        "risk_level": "High",
         "risk_signal": "Missing Source of Funds declaration",
         "ai_flags": [
           "Income Inconsistent with Bank statements",
