@@ -1,20 +1,8 @@
-
 import * as React from 'react';
-import { HelpCircle, Bell, Search, Moon, Sun } from 'lucide-react';
-
+import { HelpCircle, Bell, Search } from 'lucide-react';
 import { cn } from '../../../lib/utils';
 import { ModeToggle } from '../mode-toggle';
-
-type HeaderProps = {
-  appName?: string;
-  sectionLabel?: string;
-  placeholder?: string;
-  unreadCount?: number;
-  onSearch?: (value: string) => void;
-  onHelpClick?: () => void;
-  onBellClick?: () => void;
-  className?: string;
-};
+import { HeaderProps } from '@/types/header-type';
 
 export default function Header({
   appName = 'DemoApp',
@@ -42,7 +30,6 @@ export default function Header({
       role="banner"
     >
       <div className="mx-auto flex h-14 max-w-screen-2xl items-center gap-3 p-10 px-3 sm:px-2">
-        
         <div className="md:flex grid  min-w-0 items-center gap-2">
           <span className="md:text-[18px] text-base font-semibold tracking-tight">
             {appName}

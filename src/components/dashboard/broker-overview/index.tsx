@@ -8,26 +8,21 @@ import { useOverviewStore } from '../../../store/borrower-overview-store';
 import { useEffect } from 'react';
 import { OverviewPercentage } from './overview-percentage';
 
-
-
-
 export default function BrokerOverview() {
   const {
-  
     broker,
     workflow,
-  
+
     fetchBroker,
     fetchWorkflow,
   } = useOverviewStore();
 
   useEffect(() => {
-
     fetchBroker('1');
     fetchWorkflow();
-  }, [ fetchBroker, fetchWorkflow]);
+  }, [fetchBroker, fetchWorkflow]);
   return (
-    <Card className="rounded-3xl dark:bg-card bg-background/40 border-white/10">
+    <Card className="rounded-3xl dark:bg-card bg-slate-100 border-white/10">
       <CardHeader>
         <CardTitle>Broker Overview</CardTitle>
       </CardHeader>
@@ -47,9 +42,18 @@ export default function BrokerOverview() {
         </div>
 
         <div className="grid grid-cols-3 gap-2">
-          <OverviewPercentage label="Deals" value={broker?.deals?.toString() ?? null} />
-          <OverviewPercentage label="Approval Rate" value={broker?.approval_rate ?? null} />
-          <OverviewPercentage label="Pending" value={broker?.pending.toString() ?? null} />
+          <OverviewPercentage
+            label="Deals"
+            value={broker?.deals?.toString() ?? null}
+          />
+          <OverviewPercentage
+            label="Approval Rate"
+            value={broker?.approval_rate ?? null}
+          />
+          <OverviewPercentage
+            label="Pending"
+            value={broker?.pending.toString() ?? null}
+          />
         </div>
 
         <div className="flex items-center justify-center gap-4">

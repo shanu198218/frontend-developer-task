@@ -23,17 +23,40 @@ export function ModeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent
+        className="z-50 dark:bg-card rounded-md bg-white  my-2"
+        align="end"
+      >
         <DropdownMenuItem
-          className="focus:hover:border-none focus:bg-slate-400"
+          className="
+    border-0
+    hover:border-0 hover:border-transparent
+    focus:border-0 focus:outline-none focus-visible:ring-0
+    data-[highlighted]:outline-none data-[highlighted]:ring-0
+    focus:bg-slate-100 w-24 text-center rounded-md  dark:focus:bg-white/5 
+  "
           onClick={() => setTheme('light')}
         >
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
+        <DropdownMenuItem
+          className="my-1  border-0
+    hover:border-0 hover:border-transparent
+    focus:border-0 focus:outline-none focus-visible:ring-0
+    data-[highlighted]:outline-none data-[highlighted]:ring-0
+    focus:bg-slate-100 w-24 text-center rounded-md   dark:focus:bg-white/5  "
+          onClick={() => setTheme('dark')}
+        >
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
+        <DropdownMenuItem
+          className="my-1  border-0
+    hover:border-0 hover:border-transparent
+    focus:border-0 focus:outline-none focus-visible:ring-0
+    data-[highlighted]:outline-none data-[highlighted]:ring-0
+    focus:bg-slate-100 dark:focus:bg-white/5 w-24 text-center rounded-md   "
+          onClick={() => setTheme('system')}
+        >
           System
         </DropdownMenuItem>
       </DropdownMenuContent>

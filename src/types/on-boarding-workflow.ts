@@ -3,16 +3,14 @@ export type WorkFlowStep = {
   done: boolean;
 };
 
-
-
-export type  Workflow = {
+export type Workflow = {
   steps: string[];
-}
+};
 
 export type BrokerInfo = {
   name: string;
   deals: number;
   approval_rate: string;
   pending: number;
-  employment : string;
-}
+  employment: string;
+};
