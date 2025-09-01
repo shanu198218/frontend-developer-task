@@ -14,7 +14,7 @@ A **React dashboard** for managing borrowers, loans, and broker info. Built with
 
 
 <img width="1920" height="1052" alt="image" src="https://github.com/user-attachments/assets/dbb79ff2-c5b1-454b-bb8d-a896770d7046" />
-<img width="628" height="2943" alt="image" src="https://github.com/user-attachments/assets/7962fdd9-e11a-461b-8f7d-5092bcda00e0" />
+
 
 
 
