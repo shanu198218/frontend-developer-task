@@ -12,6 +12,7 @@ export default function BorrowerItem({
 }) {
   return (
     <Card
+      data-cy={`borrower-item-${borrower.id}`}
       onClick={onClick}
       className="
         flex items-between justify-between
@@ -24,32 +25,48 @@ export default function BorrowerItem({
         <div className="w-64 flex-initial">
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <div className="truncate md:text-base text-sm font-semibold dark:text-white text-black  max-w-[60%]">
+              <div
+                data-cy="borrower-name"
+                className="truncate md:text-base text-sm font-semibold dark:text-white text-black max-w-[60%]"
+              >
                 {borrower.name}
               </div>
 
               <Badge
+                data-cy="borrower-status"
                 className={`
-              ${statusColor[borrower.status]}
-              text-black font-medium
-              rounded-full px-2 py- md:text-sm text-xs
-            `}
+                  ${statusColor[borrower.status]}
+                  text-black font-medium
+                  rounded-full px-2 py- md:text-sm text-xs
+                `}
               >
                 {borrower.status}
               </Badge>
             </div>
 
-            <div className="text-sm my-2 dark:text-white/60 truncate">
+            <div
+              data-cy="borrower-meta"
+              className="text-sm my-2 dark:text-white/60 truncate"
+            >
               {borrower.product} • {borrower.variant}
             </div>
-            <div className="font-semibold dark:text-white text-black whitespace-nowrap md:hidden">
+
+            {/* mobile amount */}
+            <div
+              data-cy="borrower-amount-sm"
+              className="font-semibold dark:text-white text-black whitespace-nowrap md:hidden"
+            >
               {borrower.amount}
             </div>
           </div>
         </div>
+
+        {/* desktop amount */}
         <div className="w-32 flex-initial hidden md:block">
-          {' '}
-          <div className="text-right font-semibold dark:text-white text-black whitespace-nowrap">
+          <div
+            data-cy="borrower-amount-md"
+            className="text-right font-semibold dark:text-white text-black whitespace-nowrap"
+          >
             {borrower.amount}
           </div>
         </div>

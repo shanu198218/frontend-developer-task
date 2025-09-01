@@ -23,38 +23,54 @@ export default function BorrowerDetail({ borrowerId }: { borrowerId: string }) {
 
   if (loading)
     return (
-      <div>
+      <div data-cy="borrower-detail-skeleton">
         <BorrowerDetailSkeleton />
       </div>
     );
-  if (error) return <div className="text-red-500">{error}</div>;
+
+  if (error)
+    return (
+      <div data-cy="borrower-detail-error" className="text-red-500">
+        {error}
+      </div>
+    );
   if (!borrowerDetails) return null;
 
   return (
-    <Card className="rounded-3xl dark:bg-card bg-background/40 border-white/10">
-      <CardHeader>
+    <Card
+      data-cy="borrower-detail"
+      className="rounded-3xl dark:bg-card bg-background/40 border-white/10"
+    >
+      <CardHeader data-cy="borrower-detail-header">
         <div className="flex items-center justify-between">
           <div className="md:flex items-center gap-3">
-            <Avatar className="h-9 w-9">
+            <Avatar className="h-9 w-9" data-cy="borrower-avatar">
               <AvatarImage src="https://i.pravatar.cc/100?img=1" />
               <AvatarFallback>AP</AvatarFallback>
             </Avatar>
             <div>
-              <div className="font-semibold leading-tight">
+              <div
+                data-cy="borrower-name"
+                className="font-semibold leading-tight"
+              >
                 {borrowerDetails.name}
               </div>
-              <div className="text-sm text-foreground/70">
+              <div
+                data-cy="borrower-contact"
+                className="text-sm text-foreground/70"
+              >
                 {borrowerDetails.email} • {borrowerDetails.phone}
               </div>
             </div>
           </div>
-          <Badge className="bg-amber-500 text-black">
+          <Badge data-cy="borrower-status" className="bg-amber-500 text-black">
             {borrowerDetails.status}
           </Badge>
         </div>
 
-        <div className="mt-3 flex flex-wrap gap-2">
+        <div className="mt-3 flex flex-wrap gap-2" data-cy="borrower-actions">
           <Button
+            data-cy="btn-request-docs"
             variant="secondary"
             disabled={actionLoading === 'request-documents'}
             onClick={() =>
@@ -67,6 +83,7 @@ export default function BorrowerDetail({ borrowerId }: { borrowerId: string }) {
           </Button>
 
           <Button
+            data-cy="btn-send-valuer"
             variant="secondary"
             disabled={actionLoading === 'send-valuer'}
             onClick={() => handleAction('send-valuer', 'send-valuer')}
@@ -75,6 +92,7 @@ export default function BorrowerDetail({ borrowerId }: { borrowerId: string }) {
           </Button>
 
           <Button
+            data-cy="btn-approve"
             disabled={actionLoading === 'approve'}
             onClick={() => handleAction('approve', 'approve')}
           >
@@ -84,27 +102,38 @@ export default function BorrowerDetail({ borrowerId }: { borrowerId: string }) {
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <LoanSummaryCard
-          title="AI Expandability"
-          content={
-            <ul className="list-disc pl-5 space-y-1">
-              <li>Income verified</li>
-              <li>Debt ratio checked</li>
-              <li>Credit score analysis</li>
-            </ul>
-          }
-        />
+        <div data-cy="explainability-section">
+          <LoanSummaryCard
+            title="AI Expandability"
+            content={
+              <ul
+                className="list-disc pl-5 space-y-1"
+                data-cy="explainability-content"
+              >
+                <li>Income verified</li>
+                <li>Debt ratio checked</li>
+                <li>Credit score analysis</li>
+              </ul>
+            }
+          />
+        </div>
 
         <AlertList items={borrowerDetails.ai_flags || []} />
 
-        <InfoGrid />
+        <div data-cy="info-grid">
+          <InfoGrid />
+        </div>
+
         {borrowerDetails.risk_signal && (
-          <Card className="rounded-2xl bg-amber-500/90 px-4 py-3 border-0">
+          <Card
+            data-cy="risk-signal"
+            className="rounded-2xl bg-amber-500/90 px-4 py-3 border-0"
+          >
             <div className="flex items-center justify-center gap-3">
               <span className="mt-0.5">
                 <OctagonX color="black" size={24} />
               </span>
-              <p className="text-sm  text-center dark:text-black font-medium">
+              <p className="text-sm text-center dark:text-black font-medium">
                 {borrowerDetails.risk_signal}
               </p>
             </div>
@@ -114,9 +143,10 @@ export default function BorrowerDetail({ borrowerId }: { borrowerId: string }) {
 
       <CardFooter>
         <Button
+          data-cy="btn-escalate"
           className="w-full h-11 text-base"
           variant="default"
-          disabled={actionLoading === 'escalate'}
+          disabled={borrowerDetails.risk_level === 'High'}
           onClick={() => handleAction('escalate', 'escalate')}
         >
           {actionLoading === 'escalate'

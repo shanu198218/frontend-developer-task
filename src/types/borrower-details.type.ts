@@ -5,6 +5,7 @@ export type BorrowerDetails = {
   phone: string;
   status: string;
   risk_signal?: string;
+  risk_level?: string;
   ai_flags?: string[];
 };
 

@@ -23,19 +23,26 @@ export default function Header({
 
   return (
     <header
+      data-cy="header"
       className={cn(
-        'w-full border-b bg-white text-black dark:bg-card  dark:text-white border-white/10 dark:border-white/5 transition-colors',
+        'w-full border-b bg-white text-black dark:bg-card dark:text-white border-white/10 dark:border-white/5 transition-colors',
         className
       )}
       role="banner"
     >
       <div className="mx-auto flex h-14 max-w-screen-2xl items-center gap-3 p-10 px-3 sm:px-2">
-        <div className="md:flex grid  min-w-0 items-center gap-2">
-          <span className="md:text-[18px] text-base font-semibold tracking-tight">
+        <div className="md:flex grid min-w-0 items-center gap-2">
+          <span
+            data-cy="header-app-name"
+            className="md:text-[18px] text-base font-semibold tracking-tight"
+          >
             {appName}
           </span>
           {sectionLabel && (
-            <span className="rounded-full bg-black/5 px-2.5 py-1 text-xs font-medium text-black/70 dark:bg-white/10 dark:text-white/90">
+            <span
+              data-cy="header-section-label"
+              className="rounded-full bg-black/5 px-2.5 py-1 text-xs font-medium text-black/70 dark:bg-white/10 dark:text-white/90"
+            >
               {sectionLabel}
             </span>
           )}
@@ -45,6 +52,7 @@ export default function Header({
 
         {/* Search */}
         <form
+          data-cy="header-search-form"
           onSubmit={handleSubmit}
           className="relative hidden w-[380px] max-w-[52vw] items-center sm:flex"
           role="search"
@@ -55,6 +63,7 @@ export default function Header({
             className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-black/40 dark:text-white/40"
           />
           <input
+            data-cy="header-search-input"
             value={q}
             onChange={e => setQ(e.target.value)}
             className="w-full rounded-lg border border-black/10 bg-black/[0.03] pl-9 pr-3 py-2 text-sm text-black placeholder:text-black/40 outline-none transition
@@ -67,9 +76,12 @@ export default function Header({
         {/* Actions */}
         <div className="flex items-center gap-2">
           {/* Theme toggle */}
-          <ModeToggle />
+          <div data-cy="header-mode-toggle">
+            <ModeToggle />
+          </div>
 
           <button
+            data-cy="header-help"
             type="button"
             onClick={onHelpClick}
             aria-label="Help"
@@ -80,6 +92,7 @@ export default function Header({
           </button>
 
           <button
+            data-cy="header-bell"
             type="button"
             onClick={onBellClick}
             aria-label="Notifications"
@@ -89,6 +102,7 @@ export default function Header({
             <Bell className="size-4" />
             {unreadCount > 0 && (
               <span
+                data-cy="header-unread-count"
                 aria-label={`${unreadCount} unread`}
                 className="absolute -right-1 -top-1 rounded-full bg-green-500 px-1.5 py-[1px] text-[10px] font-semibold text-black"
               >

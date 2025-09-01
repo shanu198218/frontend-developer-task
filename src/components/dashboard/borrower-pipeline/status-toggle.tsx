@@ -27,11 +27,13 @@ export default function StatusToggle({
 
       <RadioGroup
         value={status}
+        data-cy="status-toggle-group"
         onValueChange={handleChange}
         className="flex items-center gap-2"
       >
         <RadioGroup
           value="Enabled"
+          data-cy="status-toggle-option-enabled"
           className={`cursor-pointer px-3 py-1 rounded-full text-sm font-medium transition-colors ${
             status === 'Enabled'
               ? 'bg-cyan-700 text-white'
@@ -43,6 +45,7 @@ export default function StatusToggle({
 
         <RadioGroup
           value="Disabled"
+          data-cy="status-toggle-option-disabled"
           className={`cursor-pointer px-3 py-1 rounded-full text-sm font-medium transition-colors ${
             status === 'Disabled'
               ? 'bg-yellow-400 text-black'

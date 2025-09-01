@@ -38,7 +38,10 @@
     "eject": "react-scripts eject",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "api": "json-server --watch db.json --port 8000"
+    "api": "json-server --watch db.json --port 8000",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test:e2e": "start-server-and-test start http://localhost:3000 cypress:run"
   },
   "eslintConfig": {
     "extends": [
@@ -62,6 +65,7 @@
     "@craco/craco": "^7.1.0",
     "@types/node": "^24.3.0",
     "autoprefixer": "^10.4.21",
+    "cypress": "^15.0.0",
     "json-server": "^1.0.0-beta.3",
     "msw": "^2.11.1",
     "postcss": "^8.5.6",
