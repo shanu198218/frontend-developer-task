@@ -1,13 +1,7 @@
-
-import { BrokerInfo, Workflow } from "@/types/on-boarding-workflow";
-import { create } from "zustand";
-
-
-
-
+import { BrokerInfo, Workflow } from '@/types/on-boarding-workflow';
+import { create } from 'zustand';
 
 interface OverviewStore {
-
   broker: BrokerInfo | null;
   workflow: Workflow | null;
 
@@ -15,12 +9,9 @@ interface OverviewStore {
   fetchWorkflow: () => Promise<void>;
 }
 
-export const useOverviewStore = create<OverviewStore>((set) => ({
-
+export const useOverviewStore = create<OverviewStore>(set => ({
   broker: null,
   workflow: null,
-
-
 
   fetchBroker: async (id: string) => {
     const res = await fetch(`/api/broker/${id}`);
@@ -29,10 +20,8 @@ export const useOverviewStore = create<OverviewStore>((set) => ({
   },
 
   fetchWorkflow: async () => {
-    const res = await fetch("/api/onboarding/workflow");
+    const res = await fetch('/api/onboarding/workflow');
     const data = await res.json();
     set({ workflow: data });
   },
-
- 
 }));

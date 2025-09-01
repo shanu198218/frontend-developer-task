@@ -7,21 +7,14 @@ import LoanSummaryCard from './loan-summary-card';
 import AlertList from './alert-list';
 import InfoGrid from './info-grid';
 import { useEffect, useState } from 'react';
-import { BorrowerDetails } from '../../../types/borrower-details.type';
 import { useBorrowerStore } from '../../../store/borrower-store';
 import BorrowerDetailSkeleton from '../../../components/common/skeltons/borrow-details-skeltons';
 
 export default function BorrowerDetail({ borrowerId }: { borrowerId: string }) {
-  const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [actionLoading] = useState<string | null>(null);
 
-  const {
-    borrowerDetails,
-    loading,
-    error,
-    success,
-    fetchBorrower,
-    handleAction,
-  } = useBorrowerStore();
+  const { borrowerDetails, loading, error, fetchBorrower, handleAction } =
+    useBorrowerStore();
 
   useEffect(() => {
     fetchBorrower(borrowerId);
@@ -109,6 +102,7 @@ export default function BorrowerDetail({ borrowerId }: { borrowerId: string }) {
       <CardFooter>
         <Button
           className="w-full h-11 text-base"
+          variant="default"
           disabled={actionLoading === 'escalate'}
           onClick={() => handleAction('escalate', 'escalate')}
         >

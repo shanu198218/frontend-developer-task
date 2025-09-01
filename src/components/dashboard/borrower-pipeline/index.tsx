@@ -4,10 +4,10 @@ import { Badge } from '../../ui/badge';
 import BorrowerItem from './borrower-item';
 import BorrowerPipelineSkeleton from '../../../components/common/skeltons/borrow-pipline-skeltons';
 import { usePipelineStore } from '../../../store/borrower-pipeline-store';
+import StatusButtonGroup from './status-button-group';
 
 export default function BorrowerPipeline() {
-  const { borrowers, loading, error, success, fetchPipeline } =
-    usePipelineStore();
+  const { borrowers, loading, error, fetchPipeline } = usePipelineStore();
 
   useEffect(() => {
     fetchPipeline();
@@ -15,16 +15,16 @@ export default function BorrowerPipeline() {
 
   const isEmpty = !borrowers.length;
 
+  const handleFilterChange = (status: string) => {
+    console.log('Selected filter:', status);
+  };
+
   return (
-    <Card className="rounded-3xl dark:bg-card bg-background/40 border-white/10">
+    <Card className="rounded-3xl dark:bg-card bg-slate-400 bg-background/40 border-white/10">
       <CardHeader>
         <CardTitle className=" items-center justify-between">
           <span>Borrower Pipeline</span>
-          <div className="flex items-center gap-2 my-3">
-            <Badge variant="secondary" className="bg-blue-base">New</Badge>
-            <Badge variant="secondary" className="bg-amber-500">In Review</Badge>
-            <Badge variant="secondary" className="bg-emerald-500">Approved</Badge>
-          </div>
+          <StatusButtonGroup onFilterChange={handleFilterChange} />
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
@@ -38,14 +38,16 @@ export default function BorrowerPipeline() {
           borrowers.map(b => <BorrowerItem key={b.id} borrower={b} />)
         )}
         <div className="pt-4 ">
-          <div className="text-xs text-white/75 uppercase  mb-2">
+          <div className="text-xs dark:text-white/75 text-black uppercase  mb-2">
             F-SANITISED ACTIVE
           </div>
           <div className="flex items-center gap-2">
-            <Badge className="bg-cyan-700 text-white/75">Enabled</Badge>
+            <Badge className="bg-cyan-700 dark:text-white/75 text-black">
+              Enabled
+            </Badge>
             <Badge
               variant="outline"
-              className="border-white/20 text-white/75 "
+              className="border-white/20 dark:text-white/75 text-black "
             >
               Disabled
             </Badge>
