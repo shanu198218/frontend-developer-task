@@ -1,37 +1,17 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 import { Badge } from '../../ui/badge';
-import { PipelineResponse } from '../../../types/borrower.pipeline.type';
-import { transformBorrower } from '../../../lib/helper.utils';
-import { Borrower } from '../../../types/borrower.type';
 import BorrowerItem from './borrower-item';
 import BorrowerPipelineSkeleton from '../../../components/common/skeltons/borrow-pipline-skeltons';
+import { usePipelineStore } from '../../../store/borrower-pipeline-store';
 
 export default function BorrowerPipeline() {
-  const [borrowers, setBorrowers] = useState<Borrower[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { borrowers, loading, error, success, fetchPipeline } =
+    usePipelineStore();
 
-  const fetchData = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch('/api/borrowers/pipeline');
-      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-      const data: PipelineResponse = await res.json();
-      setBorrowers([
-        ...data.new.map(transformBorrower),
-        ...data.in_review.map(transformBorrower),
-        ...data.approved.map(transformBorrower),
-      ]);
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : String(err));
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => { fetchData(); }, [fetchData]);
+  useEffect(() => {
+    fetchPipeline();
+  }, [fetchPipeline]);
 
   const isEmpty = !borrowers.length;
 
@@ -63,7 +43,10 @@ export default function BorrowerPipeline() {
           </div>
           <div className="flex items-center gap-2">
             <Badge className="bg-cyan-700">Enabled</Badge>
-            <Badge variant="outline" className="border-white/20 text-foreground/70">
+            <Badge
+              variant="outline"
+              className="border-white/20 text-foreground/70"
+            >
               Disabled
             </Badge>
           </div>

@@ -12,7 +12,7 @@ export type PipelineResponse = {
   approved: ApiBorrower[];
 };
 
-export type ComponentStatus = 'New' | 'In Review' | 'Approved' | 'Renew'
+export type ComponentStatus = 'New' | 'In Review' | 'Approved' | 'Renew';
 
 export const STATUS_MAP: Record<string, ComponentStatus> = {
   new: 'New',

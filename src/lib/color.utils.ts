@@ -1,5 +1,4 @@
-import { Borrower } from "../types/borrower.type";
-
+import { Borrower } from '../types/borrower.type';
 
 export const statusColor: Record<Borrower['status'], string> = {
   New: 'bg-amber-500',
