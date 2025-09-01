@@ -5,7 +5,7 @@ import Dashboard from './pages/dashboard';
 export default function App() {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <div className="min-h-screen bg-white text-black dark:bg-[#0a0f16] dark:text-white transition-colors">
+      <div className="min-h-screen bg-white text-black dark:bg-blue-dark dark:text-white transition-colors">
         <Header
           appName="DemoApp"
           sectionLabel="Loan Management"

@@ -1,14 +1,10 @@
-const steps = [
-  { label: 'KYC Completed', done: true },
-  { label: 'Broker Agreement Signed', done: true },
-  { label: 'AML Training', done: true },
-  { label: 'Compliance Review', done: false },
-  { label: 'Portal Access Granted', done: false },
-  { label: 'First Deal Submitted', done: false },
-  { label: 'Performance Checkpoint', done: false },
-];
+import { WorkFlowStep } from "@/types/on-boarding-workflow";
 
-export default function OnboardingWorkflow() {
+type OnboardingWorkflowProps = {
+  steps: WorkFlowStep[];
+};
+
+export default function OnboardingWorkflow({ steps }: OnboardingWorkflowProps) {
   return (
     <div>
       <div className="mb-2 font-semibold">Onboarding Workflow</div>
@@ -31,3 +27,4 @@ export default function OnboardingWorkflow() {
     </div>
   );
 }
+

@@ -37,10 +37,10 @@ export default function BorrowerDetail({ borrowerId }: { borrowerId: string }) {
   if (!borrowerDetails) return null;
 
   return (
-    <Card className="rounded-3xl bg-background/40 border-white/10">
+    <Card className="rounded-3xl dark:bg-card bg-background/40 border-white/10">
       <CardHeader>
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="md:flex items-center gap-3">
             <Avatar className="h-9 w-9">
               <AvatarImage src="https://i.pravatar.cc/100?img=1" />
               <AvatarFallback>AP</AvatarFallback>

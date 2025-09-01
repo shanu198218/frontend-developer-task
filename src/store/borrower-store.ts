@@ -32,7 +32,7 @@ export const useBorrowerStore = create<BorrowerState>((set, get) => ({
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Action failed');
       set({ success: data.message });
-      await get().fetchBorrower(borrower.id); // refresh borrower data
+      await get().fetchBorrower(borrower.id); 
     } catch (err: any) {
       set({ error: err.message });
     } finally {

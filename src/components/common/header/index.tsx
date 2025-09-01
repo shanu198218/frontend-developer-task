@@ -1,4 +1,4 @@
-// src/components/Header.tsx
+
 import * as React from 'react';
 import { HelpCircle, Bell, Search, Moon, Sun } from 'lucide-react';
 
@@ -36,15 +36,15 @@ export default function Header({
   return (
     <header
       className={cn(
-        'w-full border-b bg-white text-black dark:bg-[#0c121a] dark:text-white border-black/10 dark:border-white/5 transition-colors',
+        'w-full border-b bg-white text-black dark:bg-card  dark:text-white border-white/10 dark:border-white/5 transition-colors',
         className
       )}
       role="banner"
     >
-      <div className="mx-auto flex h-14 max-w-screen-2xl items-center gap-3 px-3 sm:px-4">
-        {/* Brand + section pill */}
-        <div className="flex min-w-0 items-center gap-2">
-          <span className="text-[18px] font-semibold tracking-tight">
+      <div className="mx-auto flex h-14 max-w-screen-2xl items-center gap-3 p-10 px-3 sm:px-2">
+        
+        <div className="md:flex grid  min-w-0 items-center gap-2">
+          <span className="md:text-[18px] text-base font-semibold tracking-tight">
             {appName}
           </span>
           {sectionLabel && (

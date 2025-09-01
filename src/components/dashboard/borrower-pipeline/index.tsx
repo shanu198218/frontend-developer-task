@@ -16,14 +16,14 @@ export default function BorrowerPipeline() {
   const isEmpty = !borrowers.length;
 
   return (
-    <Card className="rounded-3xl bg-background/40 border-white/10">
+    <Card className="rounded-3xl dark:bg-card bg-background/40 border-white/10">
       <CardHeader>
-        <CardTitle className="flex items-center justify-between">
+        <CardTitle className=" items-center justify-between">
           <span>Borrower Pipeline</span>
-          <div className="flex items-center gap-2">
-            <Badge className="bg-blue-600">New</Badge>
-            <Badge className="bg-amber-500">In Review</Badge>
-            <Badge className="bg-emerald-500">Approved</Badge>
+          <div className="flex items-center gap-2 my-3">
+            <Badge variant="secondary" className="bg-blue-base">New</Badge>
+            <Badge variant="secondary" className="bg-amber-500">In Review</Badge>
+            <Badge variant="secondary" className="bg-emerald-500">Approved</Badge>
           </div>
         </CardTitle>
       </CardHeader>
@@ -37,15 +37,15 @@ export default function BorrowerPipeline() {
         ) : (
           borrowers.map(b => <BorrowerItem key={b.id} borrower={b} />)
         )}
-        <div className="pt-4">
-          <div className="text-xs uppercase text-foreground/60 mb-2">
+        <div className="pt-4 ">
+          <div className="text-xs text-white/75 uppercase  mb-2">
             F-SANITISED ACTIVE
           </div>
           <div className="flex items-center gap-2">
-            <Badge className="bg-cyan-700">Enabled</Badge>
+            <Badge className="bg-cyan-700 text-white/75">Enabled</Badge>
             <Badge
               variant="outline"
-              className="border-white/20 text-foreground/70"
+              className="border-white/20 text-white/75 "
             >
               Disabled
             </Badge>
