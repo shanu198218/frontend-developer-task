@@ -21,12 +21,12 @@ export default function BorrowerDetail({ borrowerId }: { borrowerId: string }) {
     if (borrowerId) fetchBorrower(borrowerId);
   }, [borrowerId, fetchBorrower]);
 
-if (loading || error)
-  return (
-    <div data-cy="borrower-detail-skeleton">
-      <BorrowerDetailSkeleton />
-    </div>
-  );
+  if (loading || error)
+    return (
+      <div data-cy="borrower-detail-skeleton">
+        <BorrowerDetailSkeleton />
+      </div>
+    );
 
   if (!borrowerDetails) return null;
 
