@@ -3,9 +3,16 @@ import { Badge } from '../../ui/badge';
 import { Borrower } from '../../../types/borrower.type';
 import { statusColor } from '../../../lib/color.utils';
 
-export default function BorrowerItem({ borrower }: { borrower: Borrower }) {
+export default function BorrowerItem({
+  borrower,
+  onClick,
+}: {
+  borrower: Borrower;
+  onClick?: () => void;
+}) {
   return (
     <Card
+      onClick={onClick}
       className="
         flex items-between justify-between
         rounded-2xl border border-white/10

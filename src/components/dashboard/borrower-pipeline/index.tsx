@@ -1,14 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 import { Badge } from '../../ui/badge';
 import BorrowerItem from './borrower-item';
 import BorrowerPipelineSkeleton from '../../../components/common/skeltons/borrow-pipline-skeltons';
 import { usePipelineStore } from '../../../store/borrower-pipeline-store';
 import StatusButtonGroup from './status-button-group';
+import StatusToggle from './status-toggle';
 
-export default function BorrowerPipeline() {
+interface BorrowerPipelineProps {
+  onSelectBorrower?: (borrowerId: string) => void;
+}
+export default function BorrowerPipeline({
+  onSelectBorrower,
+}: BorrowerPipelineProps) {
   const { borrowers, loading, error, fetchPipeline } = usePipelineStore();
-
+  const [status, setStatus] = useState<'Enabled' | 'Disabled'>('Enabled');
   useEffect(() => {
     fetchPipeline();
   }, [fetchPipeline]);
@@ -17,6 +23,9 @@ export default function BorrowerPipeline() {
 
   const handleFilterChange = (status: string) => {
     console.log('Selected filter:', status);
+  };
+  const handleStatusChange = (val: 'Enabled' | 'Disabled') => {
+    setStatus(val);
   };
 
   return (
@@ -35,23 +44,16 @@ export default function BorrowerPipeline() {
             No borrowers in pipeline
           </div>
         ) : (
-          borrowers.map(b => <BorrowerItem key={b.id} borrower={b} />)
+          borrowers.map(b => (
+            <BorrowerItem
+              key={b.id}
+              borrower={b}
+              onClick={() => onSelectBorrower?.(b.id)}
+            />
+          ))
         )}
         <div className="pt-4 ">
-          <div className="text-xs dark:text-white/75 text-black uppercase  mb-2">
-            F-SANITISED ACTIVE
-          </div>
-          <div className="flex items-center gap-2">
-            <Badge className="bg-cyan-700 dark:text-white/75 text-black">
-              Enabled
-            </Badge>
-            <Badge
-              variant="outline"
-              className="border-white/20 dark:text-white/75 text-black "
-            >
-              Disabled
-            </Badge>
-          </div>
+          <StatusToggle onChange={handleStatusChange} />
         </div>
       </CardContent>
     </Card>
