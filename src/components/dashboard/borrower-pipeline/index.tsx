@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
-import { Badge } from '../../ui/badge';
 import BorrowerItem from './borrower-item';
 import BorrowerPipelineSkeleton from '../../../components/common/skeltons/borrow-pipline-skeltons';
 import { usePipelineStore } from '../../../store/borrower-pipeline-store';
@@ -14,7 +13,7 @@ export default function BorrowerPipeline({
   onSelectBorrower,
 }: BorrowerPipelineProps) {
   const { borrowers, loading, error, fetchPipeline } = usePipelineStore();
-  const [status, setStatus] = useState<'Enabled' | 'Disabled'>('Enabled');
+  const [, setStatus] = useState<'Enabled' | 'Disabled'>('Enabled');
   useEffect(() => {
     fetchPipeline();
   }, [fetchPipeline]);
